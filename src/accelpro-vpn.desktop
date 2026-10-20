@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=AccelPro VPN
+GenericName=VPN Client
+Comment=Connect to and monitor AccelPro Zero Trust VPN
+Exec=accelpro-vpn
+Icon=accelpro-vpn
+Terminal=false
+Categories=Network;Security;
+Keywords=VPN;AccelPro;ZTNA;
+StartupNotify=true
+StartupWMClass=Accelpro-vpn

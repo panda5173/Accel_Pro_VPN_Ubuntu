@@ -1,0 +1,13 @@
+accelpro-vpn (1.2) stable; urgency=medium
+
+  * Removed all organisation-specific names, servers and IP addresses.
+  * Reachability tiles generalised to "Service Reachability"; no default services.
+  * Generic polkit action id (io.github.accelprovpn.helper).
+
+ -- AccelPro VPN Launcher <noreply@example.com>  Tue, 20 Oct 2026 13:00:00 +0530
+
+accelpro-vpn (1.1) stable; urgency=medium
+
+  * First packaged release for Debian / Ubuntu LTS.
+
+ -- AccelPro VPN Launcher <noreply@example.com>  Tue, 20 Oct 2026 12:30:00 +0530

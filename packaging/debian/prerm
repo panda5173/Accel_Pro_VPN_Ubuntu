@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ "$1" = "remove" ]; then
+    [ -x /opt/accelpro-vpn/accelpro_client ] && /opt/accelpro-vpn/accelpro_client --stop >/dev/null 2>&1 || true
+fi
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ]; then
+    pkill -f /opt/accelpro-vpn/accelpro_vpn.py >/dev/null 2>&1 || true
+fi
+exit 0

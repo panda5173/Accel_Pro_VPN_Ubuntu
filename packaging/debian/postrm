@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    rm -rf /opt/accelpro-vpn/lib /opt/accelpro-vpn/__pycache__ 2>/dev/null || true
+    rmdir /opt/accelpro-vpn 2>/dev/null || true
+    command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor || true
+fi
+[ "$1" = "purge" ] && rm -rf /etc/accelpro-vpn
+exit 0

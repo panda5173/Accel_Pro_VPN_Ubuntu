@@ -1,0 +1,15 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: accelpro-vpn
+
+Files: opt/accelpro-vpn/accelpro_vpn.py opt/accelpro-vpn/accelpro-helper
+Copyright: AccelPro VPN Launcher contributors
+License: see project LICENSE
+
+Files: opt/accelpro-vpn/accelpro_client
+Copyright: Accelpro
+License: Proprietary. Bundled at build time by the package builder under their
+ own AccelPro licence; not part of the source repository.
+
+Files: opt/accelpro-vpn/lib/pystray/*
+Copyright: Moses Palmér
+License: LGPL-3.0-or-later

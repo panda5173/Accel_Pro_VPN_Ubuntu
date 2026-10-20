@@ -1,0 +1,39 @@
+#!/bin/bash
+# AccelPro VPN privileged helper. Root-owned; executed only through pkexec
+# (polkit action io.github.accelprovpn.helper). All arguments are strictly validated.
+set -u
+umask 022
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+DIR=/opt/accelpro-vpn
+CLIENT="$DIR/accelpro_client"
+die() { echo "Error: $1" >&2; exit "${2:-2}"; }
+
+case "${1:-}" in
+  start)
+    [ "$#" -eq 5 ] && [ "$2" = "--url" ] && [ "$4" = "--username" ] || die "invalid arguments"
+    URL="${3%/}"; USERNAME="$5"
+    [[ "$URL" =~ ^https://[A-Za-z0-9.-]+(:[0-9]{1,5})?$ ]] || die "invalid server URL"
+    [[ "$USERNAME" =~ ^[A-Za-z0-9._@-]{1,64}$ ]] || die "invalid username"
+    [ -x "$CLIENT" ] || die "AccelPro client not installed" 3
+    "$CLIENT" --start --url "$URL" --username "$USERNAME"
+    rc=$?
+    # Let the desktop user READ tunnel statistics (0644, never world-writable).
+    for _ in $(seq 1 20); do [ -f /tmp/openvpn_status.log ] && break; sleep 1; done
+    for f in /tmp/openvpn_status.log /tmp/vpn_status.json /tmp/openvpn.pid; do
+      [ -f "$f" ] && [ ! -L "$f" ] && chmod 0644 "$f"
+    done
+    exit $rc ;;
+  stop)
+    [ "$#" -eq 1 ] || die "invalid arguments"
+    [ -x "$CLIENT" ] || die "AccelPro client not installed" 3
+    exec "$CLIENT" --stop ;;
+  install-client)
+    [ "$#" -eq 2 ] || die "invalid arguments"
+    SRC="$2"
+    [ -f "$SRC" ] && [ ! -L "$SRC" ] || die "file not found"
+    [ "$(head -c4 "$SRC" | od -An -tx1 | tr -d ' \n')" = "7f454c46" ] || die "not a Linux executable"
+    install -o root -g root -m 0755 "$SRC" "$CLIENT.new" && mv -f "$CLIENT.new" "$CLIENT" || die "install failed" 4
+    echo "AccelPro client updated." ;;
+  *)
+    die "usage: accelpro-helper start --url URL --username USER | stop | install-client FILE" ;;
+esac

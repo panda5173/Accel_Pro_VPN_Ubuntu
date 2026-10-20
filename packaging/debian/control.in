@@ -1,0 +1,17 @@
+Package: accelpro-vpn
+Version: @VERSION@
+Architecture: @ARCH@
+Maintainer: @MAINTAINER@
+Installed-Size: @SIZE@
+Section: net
+Priority: optional
+Depends: python3 (>= 3.8), python3-tk, python3-pil, python3-six, python3-xlib, openvpn, pkexec | policykit-1, libnotify-bin, xdg-utils@CLIENTDEPS@
+Recommends: python3-gi, gir1.2-ayatanaappindicator3-0.1
+Suggests: google-chrome-stable | chromium | chromium-browser
+Description: Desktop launcher and monitor for the AccelPro VPN client
+ Graphical launcher for the AccelPro Zero Trust Linux client. Opens the
+ server's WebAuth page in a compact window (browser-saved password + TOTP),
+ shows live tunnel statistics, uptime and internal service reachability,
+ detects link loss, and provides a system-tray icon.
+ .
+ The password and TOTP are never stored by this application.
