@@ -1,4 +1,4 @@
-# AccelPro VPN Launcher
+# AccelPro VPN Launcher (Not Official)
 
 Unofficial desktop launcher and monitor for the **AccelPro Zero Trust Linux client**
 on Debian / Ubuntu LTS. Not affiliated with or endorsed by Accelpro.
@@ -49,3 +49,5 @@ Keep real server addresses out of public repositories.
 
 ## Licence
 Add a LICENSE file of your choice before publishing. Bundled pystray is LGPL-3.0.
+
+<img width="1293" height="735" alt="image" src="https://github.com/user-attachments/assets/d0f72a1d-2d9c-4540-8bf9-3a321b9af3fe" />
